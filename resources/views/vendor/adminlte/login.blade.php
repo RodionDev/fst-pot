@@ -5,9 +5,9 @@
 @stop
 @section('body_class', 'login-page')
 @section('body')
-    <div class="login-box">
+    <div class="auth-box login-box">
         <div class="login-logo">
-            <a href="{{ url(config('adminlte.dashboard_url', 'home')) }}">{!! config('adminlte.logo', '<b>Admin</b>LTE') !!}</a>
+            <a href="{{ url('/') }}">@include('svg.logo')</a>
         </div>
         <div class="login-box-body">
             <p class="login-box-msg">{{ __('adminlte::adminlte.login_message') }}</p>
@@ -25,6 +25,7 @@
                 </div>
                 <div class="form-group has-feedback {{ $errors->has('password') ? 'has-error' : '' }}">
                     <input type="password" name="password" class="form-control"
+                           autocomplete="new-password"
                            placeholder="{{ __('adminlte::adminlte.password') }}">
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                     @if ($errors->has('password'))
@@ -41,7 +42,7 @@
                         </div>
                     </div>
                     <div class="col-xs-4">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat">
+                        <button type="submit" class="btn btn-primary btn-block">
                             {{ __('adminlte::adminlte.sign_in') }}
                         </button>
                     </div>

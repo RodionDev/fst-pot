@@ -4,9 +4,9 @@
 @stop
 @section('body_class', 'login-page')
 @section('body')
-    <div class="login-box">
+    <div class="auth-box login-box">
         <div class="login-logo">
-            <a href="{{ url(config('adminlte.dashboard_url', 'home')) }}">{!! config('adminlte.logo', '<b>Admin</b>LTE') !!}</a>
+            <a href="{{ url('/') }}">@include('svg.logo')</a>
         </div>
         <div class="login-box-body">
             <p class="login-box-msg">{{ __('adminlte::adminlte.password_reset_message') }}</p>
@@ -43,7 +43,7 @@
                         </span>
                     @endif
                 </div>
-                <button type="submit" class="btn btn-primary btn-block btn-flat">
+                <button type="submit" class="btn btn-primary btn-block">
                     {{ __('adminlte::adminlte.reset_password') }}
                 </button>
             </form>

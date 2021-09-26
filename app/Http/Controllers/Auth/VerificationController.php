@@ -5,7 +5,7 @@ use Illuminate\Foundation\Auth\VerifiesEmails;
 class VerificationController extends Controller
 {
     use VerifiesEmails;
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/dashboard';
     public function __construct()
     {
         $this->middleware('auth');
