@@ -1,4 +1,5 @@
 @extends('frontend.layouts.app')
+@section('pageTitle', 'Datenschutz')
 @section('content')
 <main>
 <div class="container content">
