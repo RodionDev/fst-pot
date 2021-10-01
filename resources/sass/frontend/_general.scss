@@ -19,13 +19,15 @@ footer nav {
         text-decoration: none;
     }
 }
+.page-heading {
+    font-size: 3.5rem;
+    font-weight: 300;
+    line-height: 1.3;
+    margin-bottom: $spacer * 2;
+    @include fadeInRight;
+}
 .content {
-    .page-heading {
-        font-size: 3.5rem;
-        font-weight: 300;
-        line-height: 1.3;
-        margin-bottom: $spacer * 2;
-    }
+    @include fadeInLeft;
     h2 {
         line-height: 1.3;
         margin: #{$spacer * 2} 0;
@@ -33,5 +35,11 @@ footer nav {
     }
     p:last-of-type {
         margin-bottom: 0;
+    }
+}
+.card.text-white {
+    #{$a-tags} {
+        color: #fff;
+        font-weight: 900;
     }
 }

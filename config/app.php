@@ -5,10 +5,10 @@ return [
     'debug' => env('APP_DEBUG', false),
     'url' => env('APP_URL', 'http:
     'asset_url' => env('ASSET_URL', null),
-    'timezone' => 'UTC',
+    'timezone' => env('APP_TIMEZONE', 'UTC'),
     'locale' => 'de',
     'fallback_locale' => 'en',
-    'faker_locale' => 'en_US',
+    'faker_locale' => 'de_DE',
     'key' => env('APP_KEY'),
     'cipher' => 'AES-256-CBC',
     'providers' => [
