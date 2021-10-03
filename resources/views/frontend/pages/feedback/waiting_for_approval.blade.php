@@ -1,7 +1,6 @@
 @extends('frontend.layouts.app')
 @section('pageTitle', 'Freischaltung')
 @section('content')
-<main>
 <div class="container content">
     <div class="row justify-content-center mb-3">
         <div class="col-md-8">
@@ -34,5 +33,4 @@
         </div>
     </div>
 </div>
-</main>
 @endsection
