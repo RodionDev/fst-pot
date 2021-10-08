@@ -19,8 +19,11 @@ Route::group(['middleware' => ['verified']], function () {
             return view('backend.dashboard', $data);
         })->name('dashboard');
         Route::middleware(['admin'])->group(function () {
-            Route::prefix('test')->group(function () {
-                Route::get('email', 'Test\TestFrontendController@email')->name('test-email');
+            Route::namespace('Admin')->prefix('admin')->group(function () {
+                Route::resource('users', 'UsersController', ['except' => ['show', 'create', 'store']]);
+            });
+            Route::namespace('Test')->prefix('test')->group(function () {
+                Route::get('email', 'TestFrontendController@email')->name('test-email');
             });
         });
     });

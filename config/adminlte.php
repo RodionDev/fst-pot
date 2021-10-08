@@ -1,8 +1,8 @@
 <?php
 return [
     'title' => env('APP_NAME'),
-    'title_prefix' => env('APP_NAME') . ' — ',
-    'title_postfix' => '',
+    'title_prefix' => '',
+    'title_postfix' => ' — ' . env('APP_NAME'),
     'logo' => '<b>'.env('APP_NAME').'</b>',
     'logo_mini' => '<small>'.env('APP_NAME').'</small>',
     'skin' => 'black-light',
@@ -20,13 +20,13 @@ return [
         ['header' => 'main_navigation'],
         [
             'text' => 'Dashboard',
-            'url'  => 'dashboard',
-            'icon'        => 'fas fa-fw fa-th',
+            'url' => 'dashboard',
+            'icon' => 'fas fa-fw fa-th',
         ],
         [
             'text' => 'Users',
             'url'  => 'admin/users',
-            'icon'        => 'fas fa-fw fa-users-cog',
+            'icon' => 'fas fa-fw fa-users-cog',
         ],
         [
             'text' => 'Devices',

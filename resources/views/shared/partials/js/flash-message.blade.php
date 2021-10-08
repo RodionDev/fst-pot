@@ -1,5 +1,6 @@
 <script>
     toast.settings({
+        timeout: 7000,
         titleColor: '#ffffff',
         messageColor: '#ffffff',
         backgroundColor: '#333333',
@@ -9,6 +10,15 @@
     @if ($message = Session::get('toast'))
         toast.show({
             message: '{{ $message }}',
+        });
+    @endif
+    @if ($message = Session::get('toast-overlay'))
+        toast.show({
+            overlay: true,
+            displayMode: 'once',
+            zindex: 999,
+            message: '{{ $message }}',
+            position: 'center',
         });
     @endif
     @if ($message = Session::get('toast-info'))
