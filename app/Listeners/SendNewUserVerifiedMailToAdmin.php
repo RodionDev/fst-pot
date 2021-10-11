@@ -13,9 +13,9 @@ class SendNewUserVerifiedMailToAdmin
     }
     public function handle($event)
     {
-        $admin = User::admins()->first();
-        if ($admin) {
-            Mail::to($admin)->send(new NewUserVerification($event->user));
+        $superadmin = User::superadministrators()->first();
+        if ($superadmin) {
+            Mail::to($superadmin)->send(new NewUserVerification($event->user));
         }
     }
 }

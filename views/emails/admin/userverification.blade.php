@@ -1,6 +1,6 @@
 @component('mail::message')
-# Freigabe ausstehend
-Ein neuer Benutzer wurde verifiziert und wartet auf Freischaltung:
+# Neuer Nutzer
+Der Nutzer wurde verifiziert und muss überprüft werden.
 @component('mail::panel')
 Nachname: **{{$user->last_name}}**<br>
 Vorname: **{{$user->first_name}}**<br>

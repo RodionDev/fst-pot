@@ -7,63 +7,65 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
     protected $fillable = [
-        'username', 'first_name', 'last_name', 'email', 'password', 'is_admin', 'approved_at', 'rejected_at'
+        'username', 'first_name', 'last_name', 'email', 'password'
     ];
     protected $hidden = [
         'password', 'remember_token'
     ];
     protected $casts = [
-        'is_admin' => 'boolean'
     ];
     protected $dates = [
-        'email_verified_at', 'approved_at', 'rejected_at'
+        'email_verified_at'
     ];
+    public function hasAnyRoles($roles)
+    {
+        if($this->roles()->whereIn('name', $roles)->first()) return true;
+        return false;
+    }
+    public function is($role)
+    {
+        if($role == 'guest') return empty($this->roles()->get()->toArray()) ? true : false;
+        if($this->roles()->where('name', $role)->first()) return true;
+        return false;
+    }
     public function getNameAttribute()
     {
         return $this->first_name . ' ' . $this->last_name;
     }
-    public function getRejectedAttribute()
+    public function getGuestAttribute()
     {
-        return $this->rejected_at == null ? false : true;
+        return empty($this->roles()->get()->toArray()) ? true : false;
     }
-    public function getApprovedAttribute()
+    public function scopeGuests() {
+        return User::whereDoesntHave('roles')->get();
+    }
+    public function scopeAdministrators() {
+        return Role::whereName('admin')->first()->users()->whereNotNull('email_verified_at')->get();
+    }
+    public function scopeSuperadministrators() {
+        return Role::whereName('superadmin')->first()->users()->whereNotNull('email_verified_at')->get();
+    }
+    public function scopeAdministrators_all()
     {
-        return $this->approved_at == null ? false : true;
+        $regularAdmins = Role::whereName('admin')->first()->users()->whereNotNull('email_verified_at')->get();
+        $superAdmins = Role::whereName('superadmin')->first()->users()->whereNotNull('email_verified_at')->get();
+        $allAdmins = $regularAdmins->merge($superAdmins);
+        return $allAdmins->all();
     }
-    public function getPendingAttribute()
+    public function scopeUser()
     {
-        return ($this->approved_at == null && $this->rejected_at == null) ? true : false;
+        return Role::whereName('user')->first()->users()->whereNotNull('email_verified_at')->get();
     }
-    public function scopeAdmins($query) {
-        return $query
-                ->whereNotNull('email_verified_at')
-                ->where('is_admin', 1);
-    }
-    public function scopeConsumers($query) {
-        return $query
-                ->whereNotNull('email_verified_at')
-                ->where('is_admin', 0);
-    }
-    public function scopeRejected($query) {
-        return $query
-                ->whereNotNull('email_verified_at')
-                ->whereNotNull('rejected_at');
-    }
-    public function scopeApproved($query) {
-        return $query
-                ->whereNotNull('email_verified_at')
-                ->whereNotNull('approved_at');
-    }
-    public function scopePending($query) {
-        return $query
-                ->whereNotNull('email_verified_at')
-                ->whereNull('approved_at')
-                ->whereNull('rejected_at');
-    }
-    public function scopeVerified($query) {
+    public function scopeVerified($query)
+    {
         return $query->whereNotNull('email_verified_at');
     }
-    public function scopeUnverified($query) {
+    public function scopeUnverified($query)
+    {
         return $query->whereNull('email_verified_at');
+    }
+    public function roles ()
+    {
+        return $this->belongsToMany('App\Role');
     }
 }

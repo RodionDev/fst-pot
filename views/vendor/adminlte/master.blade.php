@@ -10,8 +10,8 @@
     </title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="{{ asset('vendor/bootstrap/dist/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendor/font-awesome/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/Ionicons/css/ionicons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/icheck-bootstrap/icheck-bootstrap.min.css') }}">
     @include('adminlte::plugins', ['type' => 'css'])
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/AdminLTE.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app-backend.css') }}">
@@ -25,5 +25,6 @@
 <script src="{{ asset('vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 @include('adminlte::plugins', ['type' => 'js'])
 @yield('adminlte_js')
+@include('backend.partials.js.flash-message')
 </body>
 </html>

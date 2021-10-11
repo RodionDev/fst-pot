@@ -14,7 +14,7 @@ return [
     'markdown' => [
         'theme' => 'vspot_v1',
         'paths' => [
-            resource_path('views/vendor/mail'),
+            base_path('views/vendor/mail'),
         ],
     ],
     'log_channel' => env('MAIL_LOG_CHANNEL'),

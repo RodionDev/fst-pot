@@ -5,7 +5,7 @@ return [
     'title_postfix' => ' — ' . env('APP_NAME'),
     'logo' => '<b>'.env('APP_NAME').'</b>',
     'logo_mini' => '<small>'.env('APP_NAME').'</small>',
-    'skin' => 'black-light',
+    'skin' => 'black',
     'layout' => null,
     'collapse_sidebar' => false,
     'right_sidebar' => false,
@@ -25,31 +25,9 @@ return [
         ],
         [
             'text' => 'Users',
-            'url'  => 'admin/users',
+            'url' => 'admin/users',
             'icon' => 'fas fa-fw fa-users-cog',
-        ],
-        [
-            'text' => 'Devices',
-            'url'  => 'admin/devices',
-            'icon'        => 'fas fa-fw fa-desktop',
-        ],
-        [
-            'text' => 'Channels',
-            'url'  => 'admin/channels',
-            'icon'        => 'fas fa-fw fa-project-diagram',
-        ],
-        ['header' => 'account_settings'],
-        [
-            'text' => 'Account',
-            'url'  => 'admin/account',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'change_password',
-            'url'  => 'admin/password',
-            'icon' => 'fas fa-fw fa-lock',
-        ]
-    ],
+            'active' => ['admin/users', 'admin/users
     'filters' => [
         JeroenNoten\LaravelAdminLte\Menu\Filters\HrefFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\SearchFilter::class,
@@ -128,6 +106,17 @@ return [
                     'asset' => false,
                     'location' => '
                 ],
+            ],
+        ],
+        [
+            'name' => 'FontAwesome',
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'css',
+                    'asset' => false,
+                    'location' => '
+                ]
             ],
         ],
     ],

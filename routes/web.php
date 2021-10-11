@@ -9,22 +9,17 @@ Route::view('datenschutz', 'frontend.pages.secondary.datenschutz')->name('datens
 Route::get('api/demo', 'Test\JsonDemoController@index')->name('json-demo');
 Auth::routes(['verify' => true]);
 Route::group(['middleware' => ['verified']], function () {
-    Route::get('aktivierung', function() {
-        $data['user'] = Auth::user();
-        return view('frontend.pages.feedback.waiting_for_approval', $data);
-    })->name('approval');
-    Route::middleware(['approved'])->group(function () {
-        Route::get('dashboard', function() {
-            $data['user'] = Auth::user();
-            return view('backend.dashboard', $data);
-        })->name('dashboard');
-        Route::middleware(['admin'])->group(function () {
-            Route::namespace('Admin')->prefix('admin')->group(function () {
-                Route::resource('users', 'UsersController', ['except' => ['show', 'create', 'store']]);
-            });
-            Route::namespace('Test')->prefix('test')->group(function () {
-                Route::get('email', 'TestFrontendController@email')->name('test-email');
-            });
+    Route::get('dashboard', 'Admin\DashboardController@index')->name('dashboard');
+    Route::middleware('can:manage-users')->group(function () {
+        Route::namespace('Admin')->name('admin.')->prefix('admin')->group(function () {
+            Route::resource('users', 'UsersController', ['except' => ['show', 'create', 'store']]);
+        });
+    });
+    Route::middleware('can:manage-signage')->group(function () {
+    });
+    Route::middleware('can:run-tests')->group(function () {
+        Route::namespace('Test')->name('test.')->prefix('test')->group(function () {
+            Route::get('email', 'TestFrontendController@email')->name('test-email');
         });
     });
 });
