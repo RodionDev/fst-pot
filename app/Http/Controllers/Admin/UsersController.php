@@ -57,7 +57,6 @@ class UsersController extends Controller
             return redirect()->route('admin.users.index')->with('flash-error', 'Der Benutzer $user->name ist Superadministrator und kann nicht gelöscht werden.');
         }
         try {
-            $user->roles()->detach();
             $user->delete();
             return redirect()->route('admin.users.index')->with('flash-success', "Der Benutzer $user->name wurde gelöscht.");
         }
