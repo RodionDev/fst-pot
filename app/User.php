@@ -36,6 +36,14 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return empty($this->roles()->get()->toArray()) ? true : false;
     }
+    public function getRoleIdsAttribute()
+    {
+        return $this->roles()->get()->pluck('id')->toArray();
+    }
+    public function getRoleNamesAttribute()
+    {
+        return $this->roles()->get()->pluck('name')->toArray();
+    }
     public function scopeGuests() {
         return User::whereDoesntHave('roles')->get();
     }

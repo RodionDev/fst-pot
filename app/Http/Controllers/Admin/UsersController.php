@@ -28,11 +28,11 @@ class UsersController extends Controller
         if($user->is('superadmin')) {
             return redirect()->route('admin.users.index')->with('flash-error', 'Superadministratoren dürfen nicht editiert werden.');
         }
-        $standardRoles = Role::standard();
+        $standardRolesAvailable = Role::standard()->pluck('name', 'id');
         return view('backend.admin.users.edit')
             ->with([
                 'user' => $user,
-                'roles' => $standardRoles
+                'rolesAvailable' => $standardRolesAvailable
             ]);
     }
     public function update(Request $request, User $user)
@@ -40,14 +40,25 @@ class UsersController extends Controller
         if($user->is('superadmin')) {
             return redirect()->route('admin.users.index')->with('flash-error', 'Superadministratoren dürfen nicht verändert werden.');
         }
-        try {
+        $this->validate(
+            $request,
+            [
+            'username' => 'required | alpha_dash | max:32 | unique:users,username,'.$user->id,
+            'email' => 'required | string | email | max:128 | unique:users,email,'.$user->id,
+            'first_name' => 'required | string | max:128',
+            'last_name' => 'required | string | max:128'
+            ]
+        );
+        try
+        {
             $user->roles()->sync($request->roles);
+            $user->fill($request->all())->save();
             return redirect()->route('admin.users.index')->with('flash-success', "Der Benutzer $user->name wurde aktualisiert.");
         }
         catch(ModelNotFoundException $e)
         {
-            dd(get_class_methods($e));
-            dd($e);
+            Log::error('Something is really going wrong in UsersController.');
+            return redirect()->route('admin.users.index')->with('flash-error', "Der Benutzer $user->name konnte wegen eines Fehlers nicht aktualisiert werden.");
         }
     }
     public function destroy(User $user)

@@ -10,13 +10,13 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
         Gate::define('manage-users', function($user){
-            return $user->hasAnyRoles(['superadmin', 'admin']);
+            return $user->hasAnyRoles(['Superadmin', 'Admin']);
         });
         Gate::define('manage-signage', function($user){
-            return $user->hasAnyRoles(['superadmin', 'admin', 'user']);
+            return $user->hasAnyRoles(['Superadmin', 'Admin', 'User']);
         });
         Gate::define('run-tests', function($user){
-            return $user->hasAnyRoles(['superadmin', 'admin']);
+            return $user->hasAnyRoles(['Superadmin', 'Admin', 'Tester']);
         });
     }
 }
