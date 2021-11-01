@@ -11,16 +11,28 @@ class UsersController extends Controller
     {
         try
         {
-            $users = User::verified()->get();
-            $unverifiedUsers = User::unverified()->get();
+            $users = User::verified()->paginate(6);
             return view('backend.admin.users.index')
-                ->with('users', $users)
-                ->with('unverifiedUsers', $unverifiedUsers);
+                ->with('users', $users);
         }
         catch(ModelNotFoundException $e)
         {
-            dd(get_class_methods($e));
-            dd($e);
+            Log::error('Fehler in "UsersController@index"!');
+            return redirect()->route('dashboard')->with('flash-error', "Die Benutzer können wegen eines Fehlers nicht angezeigt werden.");
+        }
+    }
+    public function indexRegistrations()
+    {
+        try
+        {
+            $users = User::unverified()->paginate(6);
+            return view('backend.admin.users.index_registrations')
+                ->with('users', $users);
+        }
+        catch(ModelNotFoundException $e)
+        {
+            Log::error('Fehler in "UsersController@indexRegistrations"!');
+            return redirect()->route('dashboard')->with('flash-error', "Die Registrierungen (unverifizierte Benutzer) können wegen eines Fehlers nicht angezeigt werden.");
         }
     }
     public function edit(User $user)
@@ -28,12 +40,20 @@ class UsersController extends Controller
         if($user->is('superadmin')) {
             return redirect()->route('admin.users.index')->with('flash-error', 'Superadministratoren dürfen nicht editiert werden.');
         }
-        $standardRolesAvailable = Role::standard()->pluck('name', 'id');
-        return view('backend.admin.users.edit')
-            ->with([
-                'user' => $user,
-                'rolesAvailable' => $standardRolesAvailable
-            ]);
+        try
+        {
+            $standardRolesAvailable = Role::standard()->pluck('name', 'id');
+            return view('backend.admin.users.edit')
+                ->with([
+                    'user' => $user,
+                    'rolesAvailable' => $standardRolesAvailable
+                ]);
+        }
+        catch(Exception $e)
+        {
+            Log::error('Fehler in "UsersController@edit"!');
+            return redirect()->route('dashboard')->with('flash-error', "Der Benutzer $user->name kann wegen eines Fehlers nicht editiert werden.");
+        }
     }
     public function update(Request $request, User $user)
     {
@@ -57,7 +77,7 @@ class UsersController extends Controller
         }
         catch(ModelNotFoundException $e)
         {
-            Log::error('Something is really going wrong in UsersController.');
+            Log::error('Fehler in "UsersController@update"!');
             return redirect()->route('admin.users.index')->with('flash-error', "Der Benutzer $user->name konnte wegen eines Fehlers nicht aktualisiert werden.");
         }
     }
@@ -73,8 +93,8 @@ class UsersController extends Controller
         }
         catch(ModelNotFoundException $e)
         {
-            dd(get_class_methods($e));
-            dd($e);
+            Log::error('Fehler in "UsersController@destroy"!');
+            return redirect()->route('admin.users.index')->with('flash-error', "Der Benutzer $user->name konnte wegen eines Fehlers nicht gelöscht werden.");
         }
     }
 }

@@ -13,6 +13,7 @@ Route::group(['middleware' => ['verified']], function () {
     Route::middleware('can:manage-users')->group(function () {
         Route::namespace('Admin')->name('admin.')->prefix('admin')->group(function () {
             Route::resource('users', 'UsersController', ['except' => ['show', 'create', 'store']]);
+            Route::get('registrations', 'UsersController@indexRegistrations');
         });
     });
     Route::middleware('can:manage-signage')->group(function () {

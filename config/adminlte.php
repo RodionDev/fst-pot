@@ -24,10 +24,38 @@ return [
             'icon' => 'fas fa-fw fa-th',
         ],
         [
-            'text' => 'Users',
-            'url' => 'admin/users',
-            'icon' => 'fas fa-fw fa-users-cog',
-            'active' => ['admin/users', 'admin/users
+            'text'    => 'Benutzerverwaltung',
+            'icon'    => 'fas fa-fw fa-users',
+            'active' => ['admin/users', 'admin/users*'],
+            'can'  => 'manage-users',
+            'submenu' => [
+                [
+                    'text' => 'Benutzerliste',
+                    'url' => 'admin/users',
+                    'icon' => 'fas fa-fw fa-user-check',
+                    'active' => ['admin/users'],
+                ],
+                [
+                    'text' => 'Registrierungen',
+                    'url' => 'admin/registrations',
+                    'icon' => 'fas fa-fw fa-user-times',
+                    'active' => ['admin/registrations'],
+                ],
+            ],
+        ],
+        [
+            'text' => 'Devices',
+            'url' => 'admin/devices',
+            'icon' => 'fas fa-fw fa-desktop',
+            'can'  => 'manage-signage',
+        ],
+        [
+            'text' => 'Channels',
+            'url' => 'admin/channels',
+            'icon' => 'fas fa-fw fa-project-diagram',
+            'can'  => 'manage-signage',
+        ],
+    ],
     'filters' => [
         JeroenNoten\LaravelAdminLte\Menu\Filters\HrefFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\SearchFilter::class,
