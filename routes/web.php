@@ -23,6 +23,11 @@ Route::group(['middleware' => ['verified']], function () {
     Route::middleware('can:run-tests')->group(function () {
         Route::namespace('Test')->name('test.')->prefix('test')->group(function () {
             Route::get('email', 'TestFrontendController@email')->name('test-email');
+            Route::prefix('qrcode')->group(function () {
+                Route::get('email', 'TestQRCodeController@email');
+                Route::get('link', 'TestQRCodeController@link');
+                Route::get('phone', 'TestQRCodeController@phone');
+            });
         });
     });
 });
