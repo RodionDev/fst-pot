@@ -10,6 +10,9 @@ Route::get('api/demo', 'Test\JsonDemoController@index')->name('json-demo');
 Auth::routes(['verify' => true]);
 Route::group(['middleware' => ['verified']], function () {
     Route::get('dashboard', 'Admin\DashboardController@index')->name('dashboard');
+    Route::middleware('can:manage-vspot')->group(function () {
+        Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+    });
     Route::middleware('can:manage-users')->group(function () {
         Route::namespace('Admin')->name('admin.')->prefix('admin')->group(function () {
             Route::resource('users', 'UsersController', ['except' => ['show', 'create', 'store']]);

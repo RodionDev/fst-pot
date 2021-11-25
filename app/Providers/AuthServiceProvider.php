@@ -9,6 +9,12 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
+        Gate::define('view-admin-menu', function($user){
+            return $user->hasAnyRoles(['Superadmin', 'Admin']);
+        });
+        Gate::define('manage-vspot', function($user){
+            return $user->hasAnyRoles(['Superadmin', 'Admin']);
+        });
         Gate::define('manage-users', function($user){
             return $user->hasAnyRoles(['Superadmin', 'Admin']);
         });
