@@ -18,7 +18,7 @@ class UsersController extends Controller
         catch(ModelNotFoundException $e)
         {
             Log::error('Fehler in "UsersController@index"!');
-            return redirect()->route('dashboard')->with('flash-error', "Die Benutzer können wegen eines Fehlers nicht angezeigt werden.");
+            return back()->with('flash-error', "Die Benutzer können wegen eines Fehlers nicht angezeigt werden.");
         }
     }
     public function indexRegistrations()
@@ -32,13 +32,13 @@ class UsersController extends Controller
         catch(ModelNotFoundException $e)
         {
             Log::error('Fehler in "UsersController@indexRegistrations"!');
-            return redirect()->route('dashboard')->with('flash-error', "Die Registrierungen (unverifizierte Benutzer) können wegen eines Fehlers nicht angezeigt werden.");
+            return back()->with('flash-error', "Die Registrierungen (unverifizierte Benutzer) können wegen eines Fehlers nicht angezeigt werden.");
         }
     }
     public function edit(User $user)
     {
         if($user->is('superadmin')) {
-            return redirect()->route('admin.users.index')->with('flash-error', 'Superadministratoren dürfen nicht editiert werden.');
+            return back()->with('flash-error', 'Superadministratoren dürfen nicht editiert werden.');
         }
         try
         {
@@ -52,13 +52,13 @@ class UsersController extends Controller
         catch(Exception $e)
         {
             Log::error('Fehler in "UsersController@edit"!');
-            return redirect()->route('dashboard')->with('flash-error', "Der Benutzer $user->name kann wegen eines Fehlers nicht editiert werden.");
+            return back()->with('flash-error', "Der Benutzer $user->name kann wegen eines Fehlers nicht editiert werden.");
         }
     }
     public function update(Request $request, User $user)
     {
         if($user->is('superadmin')) {
-            return redirect()->route('admin.users.index')->with('flash-error', 'Superadministratoren dürfen nicht verändert werden.');
+            return back()->with('flash-error', 'Superadministratoren dürfen nicht verändert werden.');
         }
         $this->validate(
             $request,
@@ -73,28 +73,28 @@ class UsersController extends Controller
         {
             $user->roles()->sync($request->roles);
             $user->fill($request->all())->save();
-            return redirect()->route('admin.users.index')->with('flash-success', "Der Benutzer $user->name wurde aktualisiert.");
+            return back()->with('flash-success', "Der Benutzer $user->name wurde aktualisiert.");
         }
         catch(ModelNotFoundException $e)
         {
             Log::error('Fehler in "UsersController@update"!');
-            return redirect()->route('admin.users.index')->with('flash-error', "Der Benutzer $user->name konnte wegen eines Fehlers nicht aktualisiert werden.");
+            return back()->with('flash-error', "Der Benutzer $user->name konnte wegen eines Fehlers nicht aktualisiert werden.");
         }
     }
     public function destroy(User $user)
     {
         if($user->is('superadmin'))
         {
-            return redirect()->route('admin.users.index')->with('flash-error', 'Der Benutzer $user->name ist Superadministrator und kann nicht gelöscht werden.');
+            return back()->with('flash-error', 'Der Benutzer $user->name ist Superadministrator und kann nicht gelöscht werden.');
         }
         try {
             $user->delete();
-            return redirect()->route('admin.users.index')->with('flash-success', "Der Benutzer $user->name wurde gelöscht.");
+            return back()->with('flash-success', "Der Benutzer $user->name wurde gelöscht.");
         }
         catch(ModelNotFoundException $e)
         {
             Log::error('Fehler in "UsersController@destroy"!');
-            return redirect()->route('admin.users.index')->with('flash-error', "Der Benutzer $user->name konnte wegen eines Fehlers nicht gelöscht werden.");
+            return back()->with('flash-error', "Der Benutzer $user->name konnte wegen eines Fehlers nicht gelöscht werden.");
         }
     }
 }
