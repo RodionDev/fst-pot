@@ -57,12 +57,10 @@
                     </div>
                 </div>
             </div>
-            <ul class="list-group">
-                <li class="list-group-item text-right">
-                    <a href="{{ url()->previous() }}" class="btn btn-default pull-left">Zurück</a>
-                    {{ Form::vspotSubmit() }}
-                </li>
-            </ul>
+            <div class="panel-footer text-right">
+                <a href="{{ url()->previous() }}" class="btn btn-default pull-left">Zurück</a>
+                {{ Form::vspotSubmit() }}
+            </div>
         </div> 
         {!! Form::close() !!}
     </div>
@@ -71,9 +69,7 @@
 @section('adminlte_js')
     <script>
     jQuery(document).ready(function($) {
-        $('.roles-select-multiple').select2({
-            width: '100%'
-        });
+        $('.roles-select-multiple').select2({width: '100%'});
     });
     </script>
 @endsection
