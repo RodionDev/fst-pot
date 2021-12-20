@@ -9,10 +9,12 @@ class AppServiceProvider extends ServiceProvider
     }
     public function boot()
     {
-        Form::component('vspotText', 'form-components.text', ['name', 'label' => null, 'value' => null, 'attributes' => []]);
-        Form::component('vspotEmail', 'form-components.text', ['name', 'label' => null, 'value' => null, 'attributes' => []]);
-        Form::component('vspotPassword', 'form-components.password', ['name', 'label' => null, 'value' => null, 'attributes' => []]);
-        Form::component('vspotSubmit', 'form-components.btn-submit', ['text' => 'Speichern']);
-        Form::component('vspotBack', 'form-components.btn-back', ['text' => 'Zurück']);
+        $compPrefix = 'vspot';
+        $formCompPath = 'backend.components.forms.';
+        Form::component($compPrefix.'Text', $formCompPath.'text', ['name', 'label' => null, 'value' => null, 'attributes' => []]);
+        Form::component($compPrefix.'Email', $formCompPath.'email', ['name', 'label' => null, 'value' => null, 'attributes' => []]);
+        Form::component($compPrefix.'Password', $formCompPath.'password', ['name', 'label' => null, 'value' => null, 'attributes' => []]);
+        Form::component($compPrefix.'Submit', $formCompPath.'btn-submit', ['text' => 'Speichern']);
+        Form::component($compPrefix.'Back', $formCompPath.'btn-back', ['text' => 'Zurück']);
     }
 }
