@@ -52,12 +52,13 @@ class DeviceController extends Controller
         }
         catch(ModelNotFoundException $e)
         {
-            Log::error('Fehler in "UsersController@update"!');
+            Log::error('Fehler in "DeviceController@store"!');
             return back()->with('flash-error', "Das neue Gerät konnte wegen eines Fehlers nicht angelegt werden.");
         }
     }
     public function show(Device $device)
     {
+        return redirect()->route('devices.index');
     }
     public function edit(Device $device)
     {
