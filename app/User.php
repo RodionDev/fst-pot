@@ -80,4 +80,8 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany('App\Device');
     }
+    public function channels ()
+    {
+        return $this->hasMany('App\Channel');
+    }
 }
