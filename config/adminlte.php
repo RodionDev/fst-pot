@@ -37,66 +37,7 @@ return [
                     'text' => 'Geräteliste',
                     'url' => 'devices',
                     'icon' => 'fas fa-fw fa-clipboard-list',
-                    'active' => ['devices', 'devices/?page=*'],
-                ],
-                [
-                    'text' => 'Neues Gerät',
-                    'url' => 'devices/create',
-                    'icon' => 'fas fa-fw fa-plus-square',
-                    'active' => ['devices/create'],
-                ],
-            ],
-        ],
-        [
-            'text' => 'Channels',
-            'icon' => 'fas fa-fw fa-project-diagram',
-            'can'  => 'manage-signage',
-            'submenu' => [
-                [
-                    'text' => 'Channelliste',
-                    'url' => 'channels',
-                    'icon' => 'fas fa-fw fa-clipboard-list',
-                    'active' => ['channels', 'channels/?page=*'],
-                ],
-                [
-                    'text' => 'Neuer Channel',
-                    'url' => 'channels/create',
-                    'icon' => 'fas fa-fw fa-plus-square',
-                    'active' => ['channels/create'],
-                ],
-            ],
-        ],
-        [
-            'header' => 'Administration',
-            'can'  => 'view-admin-menu',
-        ],
-        [
-        'text' => 'Logs',
-        'url' => '/logs',
-        'target' => '_blank',
-        'icon' => 'fas fa-fw fa-scroll',
-        'can'  => 'manage-vspot',
-        ],
-        [
-            'text'    => 'Benutzerverwaltung',
-            'icon'    => 'fas fa-fw fa-users',
-            'can'  => 'manage-users',
-            'submenu' => [
-                [
-                    'text' => 'Benutzerliste',
-                    'url' => 'admin/users',
-                    'icon' => 'fas fa-fw fa-user-check',
-                    'active' => ['admin/users', 'admin/users/?page=*'],
-                ],
-                [
-                    'text' => 'Registrierungen',
-                    'url' => 'admin/registrations',
-                    'icon' => 'fas fa-fw fa-user-times',
-                    'active' => ['admin/registrations', 'admin/registrations/?page=*'],
-                ],
-            ],
-        ],
-    ],
+                    'active' => ['devices', 'devices
     'filters' => [
         JeroenNoten\LaravelAdminLte\Menu\Filters\HrefFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\SearchFilter::class,
