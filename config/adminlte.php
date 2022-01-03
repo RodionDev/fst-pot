@@ -37,7 +37,7 @@ return [
                     'text' => 'Geräteliste',
                     'url' => 'devices',
                     'icon' => 'fas fa-fw fa-clipboard-list',
-                    'active' => ['devices', 'devices
+                    'active' => ['devices', 'devices/?page=*', 'devicesscreens', 'channelsscreens
     'filters' => [
         JeroenNoten\LaravelAdminLte\Menu\Filters\HrefFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\SearchFilter::class,

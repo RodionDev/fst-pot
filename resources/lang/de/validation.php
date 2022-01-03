@@ -110,6 +110,9 @@ return [
         'channel_id' => [
             'exists' => 'Dieser Channel existiert nicht.',
         ],
+        'layout_id' => [
+            'exists' => 'Dieses Layout existiert nicht.',
+        ],
     ],
     'attributes' => [
         'name'                  => 'Name',

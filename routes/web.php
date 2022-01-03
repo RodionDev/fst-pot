@@ -22,6 +22,7 @@ Route::group(['middleware' => ['verified']], function () {
     Route::middleware('can:manage-signage')->group(function () {
         Route::resource('devices', 'DeviceController', ['except' => ['show']]);
         Route::resource('channels', 'ChannelController', ['except' => ['show']]);
+        Route::resource('channels.screens', 'ScreenController', ['except' => ['show']]);
     });
     Route::middleware('can:run-tests')->group(function () {
         Route::namespace('Test')->name('test.')->prefix('test')->group(function () {
