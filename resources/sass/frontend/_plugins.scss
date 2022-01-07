@@ -12,6 +12,7 @@
     background-color: $color_b_transparent;
     color: #FFF;
     text-align: center;
+    @include fadeInUp;
     &__message {
         line-height: 1;
         margin: 0 0 2rem 0;
