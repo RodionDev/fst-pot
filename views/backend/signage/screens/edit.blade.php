@@ -33,6 +33,7 @@
                     <div class="col-xs-12 col-md-12 col-lg-6">
                         {{ Form::vspotText('description', 'Beschreibung') }}
                     </div>
+                    @includeFirst([$formFragment, $formFragmentDefault])
                 </div>
             </div>
             <div class="panel-footer text-right">

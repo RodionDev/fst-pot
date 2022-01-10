@@ -12,14 +12,16 @@ class CreateScreensTable extends Migration
             $table->unsignedBigInteger('layout_id');
             $table->string('name');
             $table->string('description')->nullable();
+            $table->boolean('active')->default(1);
             $table->string('background_color')->nullable();
             $table->string('text_color')->nullable();
-            $table->string('cdn_link_background_image')->nullable();
+            $table->string('bg_img_cdn_link')->nullable();
+            $table->decimal('bg_img_opacity', 3, 2)->nullable();
             $table->string('overlay_color')->nullable();
-            $table->decimal('overlay_opacity', 3, 2)->nullable();
             $table->string('heading')->nullable();
             $table->string('subheading')->nullable();
             $table->text('html_block')->nullable();
+            $table->text('text_block')->nullable();
             $table->timestamps();
             $table->foreign('channel_id')->references('id')->on('channels')->onDelete('cascade');
         });
