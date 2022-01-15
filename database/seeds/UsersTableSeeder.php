@@ -27,6 +27,7 @@ class UsersTableSeeder extends Seeder
             $superadmin->email = env('INITIAL_SUPERADMIN_EMAIL');
             $superadmin->email_verified_at = $now;
             $superadmin->password = Hash::make(env('INITIAL_SUPERADMIN_PASSWORD'));
+            $superadmin->api_token = Str::random(60);
         $superadmin->save();
         $superadmin->roles()->attach($superadminRole);
         $user1 = new User();
@@ -36,6 +37,7 @@ class UsersTableSeeder extends Seeder
             $user1->email = env('INITIAL_USER_EMAIL_1');
             $user1->email_verified_at = $now;
             $user1->password = Hash::make(env('INITIAL_USER_PASSWORD_1'));
+            $user1->api_token = Str::random(60);
         $user1->save();
         $user1->roles()->attach($adminRole);
         $user2 = new User();
@@ -45,6 +47,7 @@ class UsersTableSeeder extends Seeder
             $user2->email = env('INITIAL_USER_EMAIL_2');
             $user2->email_verified_at = $now;
             $user2->password = Hash::make(env('INITIAL_USER_PASSWORD_2'));
+            $user2->api_token = Str::random(60);
         $user2->save();
         $user2->roles()->attach($userRole);
         $user3 = new User();
@@ -54,6 +57,7 @@ class UsersTableSeeder extends Seeder
             $user3->email = env('INITIAL_USER_EMAIL_3');
             $user3->email_verified_at = $now;
             $user3->password = Hash::make(env('INITIAL_USER_PASSWORD_3'));
+            $user3->api_token = Str::random(60);
         $user3->save();
         $user3->roles()->attach($testerRole);
         $user3->roles()->attach($inspectorRole);
