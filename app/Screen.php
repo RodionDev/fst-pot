@@ -6,7 +6,7 @@ class Screen extends Model
     protected $touches = ['channel'];
     protected $fillable = [
         'name', 'description',
-        'background_color', 'text_color', 'bg_img_cdn_link', 'bg_img_opacity', 'overlay_color', 'heading', 'subheading', 'html_block'
+        'background_color', 'text_color', 'bg_img_cdn_link', 'overlay_color', 'heading', 'subheading', 'html_block', 'text_block'
     ];
     public function channel ()
     {

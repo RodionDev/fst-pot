@@ -33,6 +33,18 @@
                     <div class="col-xs-12 col-md-12 col-lg-6">
                         {{ Form::vspotText('description', 'Beschreibung') }}
                     </div>
+                    <div class="col-xs-12 col-md-6 col-lg-2">
+                        {{ Form::vspotText('background_color', 'Hintergrundfarbe') }}
+                    </div>
+                    <div class="col-xs-12 col-md-6 col-lg-6">
+                        {{ Form::vspotText('bg_img_cdn_link', 'Bild (CDN-Link)') }}
+                    </div>
+                    <div class="col-xs-12 col-md-6 col-lg-2">
+                        {{ Form::vspotText('overlay_color', 'Farbe des Overlay') }}
+                    </div>
+                    <div class="col-xs-12 col-md-6 col-lg-2">
+                        {{ Form::vspotText('text_color', 'Textfarbe') }}
+                    </div>
                     @include('backend.signage.screens._form_elements_config')
                 </div>
             </div>
