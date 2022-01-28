@@ -99,6 +99,12 @@ h6, .h6 {
 .mt-0 {
     margin-top: 0;
 }
+.mt-05 {
+    margin-top: 0.5rem;
+}
+.mt-1 {
+    margin-top: 1rem;
+}
 .mb-0 {
     margin-bottom: 0;
 }

@@ -1,6 +1,6 @@
 @if(empty($screenConfig))
     <div class="col-xs-12">
-        <div class="alert alert-warning" role="alert">Für dieses Layout wurde noch keine Konfiguration angelegt.</div>
+        <div class="alert alert-info" role="alert">Für dieses Layout werden die Inhalte automatisch generiert.</div>
     </div>
 @endif
 @if(in_array('heading', $screenConfig))
@@ -12,4 +12,9 @@
 <div class="col-xs-12 col-md-6">
     {{ Form::vspotText('subheading', 'Unterüberschrift') }}
 </div>
+@endif
+@if(in_array('textarea', $screenConfig))
+    <div class="col-xs-12 col-md-6">
+        {{ Form::vspotTextarea('text_block', 'Textblock') }}
+    </div>
 @endif

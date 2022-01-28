@@ -12,6 +12,7 @@ class AppServiceProvider extends ServiceProvider
         $compPrefix = 'vspot';
         $formCompPath = 'backend.components.forms.';
         Form::component($compPrefix.'Text', $formCompPath.'text', ['name', 'label' => null, 'value' => null, 'attributes' => []]);
+        Form::component($compPrefix.'Textarea', $formCompPath.'textarea', ['name', 'label' => null, 'value' => null, 'attributes' => []]);
         Form::component($compPrefix.'Email', $formCompPath.'email', ['name', 'label' => null, 'value' => null, 'attributes' => []]);
         Form::component($compPrefix.'Password', $formCompPath.'password', ['name', 'label' => null, 'value' => null, 'attributes' => []]);
         Form::component($compPrefix.'Submit', $formCompPath.'btn-submit', ['text' => 'Speichern']);

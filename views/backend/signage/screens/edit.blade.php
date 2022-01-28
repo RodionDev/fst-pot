@@ -61,6 +61,9 @@
 <script>
     jQuery(document).ready(function($) {
         $('#screen-layout-select').select2({width: '100%'});
+        $('#background_color').colorpicker();
+        $('#overlay_color').colorpicker();
+        $('#text_color').colorpicker();
     });
 </script>
 @endsection
