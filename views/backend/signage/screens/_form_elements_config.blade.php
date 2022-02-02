@@ -13,8 +13,13 @@
     {{ Form::vspotText('subheading', 'Unterüberschrift') }}
 </div>
 @endif
-@if(in_array('textarea', $screenConfig))
+@if(in_array('textblock', $screenConfig))
     <div class="col-xs-12 col-md-6">
         {{ Form::vspotTextarea('text_block', 'Textblock') }}
+    </div>
+@endif
+@if(in_array('htmlblock', $screenConfig))
+    <div class="col-xs-12">
+        {{ Form::vspotTextarea('html_block', 'Textblock') }}
     </div>
 @endif

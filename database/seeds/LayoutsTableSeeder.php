@@ -8,6 +8,7 @@ class LayoutsTableSeeder extends Seeder
         $layouts = [
             ['name' => 'Test'],
             ['name' => 'Basic'],
+            ['name' => 'HTML'],
         ];
         foreach ($layouts as $layout) {
             Layout::updateOrCreate($layout);

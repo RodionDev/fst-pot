@@ -145,5 +145,21 @@ return [
                 ],
             ],
         ],
+        [
+            'name' => 'summernote',
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'css',
+                    'asset' => false,
+                    'location' => '
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => '
+                ],
+            ],
+        ],
     ],
 ];

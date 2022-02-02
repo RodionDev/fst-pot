@@ -1,6 +1,7 @@
 <?php
 namespace App;
 use Illuminate\Database\Eloquent\Model;
+use Purifier;
 class Screen extends Model
 {
     protected $touches = ['channel'];
@@ -8,6 +9,10 @@ class Screen extends Model
         'name', 'description',
         'background_color', 'text_color', 'bg_img_cdn_link', 'overlay_color', 'heading', 'subheading', 'html_block', 'text_block'
     ];
+    public function setHtmlBlockAttribute($value)
+    {
+        $this->attributes['html_block'] = Purifier::clean($value);
+    }
     public function channel ()
     {
         return $this->belongsTo('App\Channel');
