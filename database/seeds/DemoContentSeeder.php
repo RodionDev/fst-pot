@@ -126,6 +126,57 @@ class DemoContentSeeder extends Seeder
         $channel_vspot->description = "Zeigt Screens rund um das Projekt";
         $channel_vspot->user()->associate($superadmin);
         $channel_vspot->save();
+        $screen_vspot_project_name_description = new Screen();
+        $screen_vspot_project_name_description->name = "Projektname";
+        $screen_vspot_project_name_description->description = "Zeigt zweizeilig Projektname und -beschreibung";
+        $screen_vspot_project_name_description->background_color = "#000000";
+        $screen_vspot_project_name_description->text_color = "#FFFFFF";
+        $screen_vspot_project_name_description->heading = "Projekt VSPOT";
+        $screen_vspot_project_name_description->subheading = 'Umsetzung eines Systems für digitale Beschilderung';
+        $screen_vspot_project_name_description->layout()->associate($basicLayout);
+        $screen_vspot_project_name_description->channel()->associate($channel_vspot);
+        $screen_vspot_project_name_description->save();
+        $screen_vspot_authors = new Screen();
+        $screen_vspot_authors->name = "Autoren";
+        $screen_vspot_authors->description = "Zeigt die Autoren, Daniel Sixl und Stefan Süß";
+        $screen_vspot_authors->background_color = "#C70038";
+        $screen_vspot_authors->text_color = "#FFFFFF";
+        $screen_vspot_authors->heading = "Autoren";
+        $screen_vspot_authors->subheading = "Stefan Süß & Daniel Sixl";
+        $screen_vspot_authors->layout()->associate($basicLayout);
+        $screen_vspot_authors->channel()->associate($channel_vspot);
+        $screen_vspot_authors->save();
+        $screen_vspot_logo = new Screen();
+        $screen_vspot_logo->name = "Logo";
+        $screen_vspot_logo->description = "Zeigt das Logo in der Text-Variante";
+        $screen_vspot_logo->bg_img_cdn_link = "https:
+        $screen_vspot_logo->layout()->associate($basicLayout);
+        $screen_vspot_logo->channel()->associate($channel_vspot);
+        $screen_vspot_logo->save();
+        $screen_vspot_schema_techstack_html =
+        "
+        <img src='https:
+        ";
+        $screen_vspot_schema_techstack = new Screen();
+        $screen_vspot_schema_techstack->name = "Schema Technologie";
+        $screen_vspot_schema_techstack->description = "SVG mit den eingesetzten Lösungen des Projekts";
+        $screen_vspot_schema_techstack->background_color = "#FFFFFF";
+        $screen_vspot_schema_techstack->html_block = $screen_vspot_schema_techstack_html;
+        $screen_vspot_schema_techstack->layout()->associate($htmlLayout);
+        $screen_vspot_schema_techstack->channel()->associate($channel_vspot);
+        $screen_vspot_schema_techstack->save();
+        $screen_vspot_erm_html =
+        "
+        <img src='https:
+        ";
+        $screen_vspot_erm = new Screen();
+        $screen_vspot_erm->name = "Schema Datanbank";
+        $screen_vspot_erm->description = "SVG mit den eingesetzten Lösungen des Projekts";
+        $screen_vspot_erm->background_color = "#FFFFFF";
+        $screen_vspot_erm->html_block = $screen_vspot_erm_html;
+        $screen_vspot_erm->layout()->associate($htmlLayout);
+        $screen_vspot_erm->channel()->associate($channel_vspot);
+        $screen_vspot_erm->save();
         $screen_vspot_invitation_html =
         "
         <h3>Projektvorstellung</h3>
