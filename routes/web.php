@@ -8,8 +8,8 @@ Route::view('impressum', 'frontend.pages.secondary.impressum')->name('impressum'
 Route::view('datenschutz', 'frontend.pages.secondary.datenschutz')->name('datenschutz');
 Route::get('api/demo', 'Test\JsonDemoController@index')->name('demo.api.json');
 Route::middleware('auth:api')->group(function() {
-    Route::namespace('Web')->name('.web')->prefix('web/v1')->group(function () {
-        Route::get('{user}/{device}', 'WebAccessController@respond')->name('webaccess');
+    Route::namespace('Web')->name('web.')->prefix('web/v1')->group(function () {
+        Route::get('{user}/{device}', 'WebAccessController@respond_v1')->name('access_v1');
     });
 });
 Auth::routes(['verify' => true]);
@@ -33,12 +33,12 @@ Route::group(['middleware' => ['verified']], function () {
     });
     Route::middleware('can:run-tests')->group(function () {
         Route::namespace('Test')->name('test.')->prefix('test')->group(function () {
-            Route::get('playground', 'TestFrontendController@playground')->name('test-playground');
-            Route::get('email', 'TestFrontendController@email')->name('test-email');
+            Route::get('playground', 'TestFrontendController@playground')->name('playground');
+            Route::get('email', 'TestFrontendController@email')->name('email');
             Route::prefix('qrcode')->group(function () {
-                Route::get('email', 'TestQRCodeController@email')->name('test-qr-email');
-                Route::get('link', 'TestQRCodeController@link')->name('test-qr-link');
-                Route::get('phone', 'TestQRCodeController@phone')->name('test-qr-phone');
+                Route::get('email', 'TestQRCodeController@email')->name('qr-email');
+                Route::get('link', 'TestQRCodeController@link')->name('qr-link');
+                Route::get('phone', 'TestQRCodeController@phone')->name('qr-phone');
             });
         });
     });

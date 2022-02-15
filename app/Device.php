@@ -7,27 +7,35 @@ class Device extends Model
     protected $fillable = [
         'display_name', 'product_reference', 'description', 'location', 'channel_id'
     ];
-    private function makePublicURL()
+    private function makePublicURL($api = false)
     {
-        return env('APP_URL').'/web/v1/'.$this->user->id.'/'.$this->id.'?api_token='.$this->user->api_token;
+        $type = $api ? 'api' : 'web';
+        return env('APP_URL').'/'.$type.'/v1/'.$this->user->id.'/'.$this->id.'?api_token='.$this->user->api_token;
     }
     public function getWebURLAttribute()
     {
         return $this->makePublicURL();
     }
-    public function getWebURLUpdateAttribute()
+    public function getApiURLAttribute()
     {
-        $link = $this->makePublicURL();
-        return  $link .= '&timestamp';
+        return $this->makePublicURL(true);
     }
-    public function getQrAttribute()
+    private function makeQR($api = false)
     {
-        $link = $this->makePublicURL();
+        $link = $this->makePublicURL($api);
         return QrCode::encoding('UTF-8')
             ->size(270)
             ->backgroundColor(255,255,255)
             ->color(51,51,51)
             ->generate($link);
+    }
+    public function getWebQrAttribute()
+    {
+        return $this->makeQR();
+    }
+    public function getApiQrAttribute()
+    {
+        return $this->makeQR(true);
     }
     public function user ()
     {

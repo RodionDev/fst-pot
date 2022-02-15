@@ -5,11 +5,11 @@ use App\Layout;
 use App\Screen;
 use App\User;
 use Illuminate\Database\Seeder;
-class DemoContentSeeder extends Seeder
+class DemoContentSeederSuperadmin extends Seeder
 {
     public function run()
     {
-        $superadmin = User::superadministrators()->first();
+        $superadmin = User::whereUsername(env('INITIAL_SUPERADMIN_USERNAME'))->first();
         $testLayout = Layout::whereName('Test')->first();
         $basicLayout = Layout::whereName('Basic')->first();
         $htmlLayout = Layout::whereName('HTML')->first();
@@ -154,9 +154,7 @@ class DemoContentSeeder extends Seeder
         $screen_vspot_logo->channel()->associate($channel_vspot);
         $screen_vspot_logo->save();
         $screen_vspot_schema_techstack_html =
-        "
-        <img src='https:
-        ";
+        "<img src='https:
         $screen_vspot_schema_techstack = new Screen();
         $screen_vspot_schema_techstack->name = "Schema Technologie";
         $screen_vspot_schema_techstack->description = "SVG mit den eingesetzten Lösungen des Projekts";
@@ -166,11 +164,9 @@ class DemoContentSeeder extends Seeder
         $screen_vspot_schema_techstack->channel()->associate($channel_vspot);
         $screen_vspot_schema_techstack->save();
         $screen_vspot_erm_html =
-        "
-        <img src='https:
-        ";
+        "<img src='https:
         $screen_vspot_erm = new Screen();
-        $screen_vspot_erm->name = "Schema Datanbank";
+        $screen_vspot_erm->name = "Schema Datenbank";
         $screen_vspot_erm->description = "SVG mit den eingesetzten Lösungen des Projekts";
         $screen_vspot_erm->background_color = "#FFFFFF";
         $screen_vspot_erm->html_block = $screen_vspot_erm_html;
@@ -178,13 +174,11 @@ class DemoContentSeeder extends Seeder
         $screen_vspot_erm->channel()->associate($channel_vspot);
         $screen_vspot_erm->save();
         $screen_vspot_invitation_html =
-        "
-        <h3>Projektvorstellung</h3>
+        "<h3>Projektvorstellung</h3>
         <h2><span class='w700'>VSPOT</span> <small class='w200'>Digital Signage Solution</small></h2>
         <h3 class='w400'>Stefan Süß und Daniel Sixl</h3>
         <p>Kommen Sie uns besuchen: <b style=\"background-color:#C70038;\">Erdgeschoss / Zimmer 3</span></p>
-        <blockquote><p>If debugging is the process of removing software bugs, then programming must be the process of putting them in.<br><small>— Edsger Dijkstra</small></p></blockquote>
-        ";
+        <blockquote><p>If debugging is the process of removing software bugs, then programming must be the process of putting them in.<br><small>— Edsger Dijkstra</small></p></blockquote>";
         $screen_vspot_invitation = new Screen();
         $screen_vspot_invitation->name = "Einladung";
         $screen_vspot_invitation->description = "Einladung zur Projektvorstellung";
@@ -200,12 +194,10 @@ class DemoContentSeeder extends Seeder
         $channel_reception->user()->associate($superadmin);
         $channel_reception->save();
         $screen_reception_1_html =
-        "
-        <h3>Willkommen</h3>
+        "<h3>Willkommen</h3>
         <h1>Herr Stefan Süß</h1>
         <p>Ihr Termin: <b style=\"background-color:rgb(107,165,74);\">Zimmer E03</b>, bei <span style=\"background-color:rgb(231,148,57);\">Herrn Sixl</span></p>
-        <ul><li>08:00 - 09:30 Besprechung Projekt VSPOT</li><li>10:00 - 11:30 BarCamp Digital Signage</li></ul>
-        ";
+        <ul><li>08:00 - 09:30 Besprechung Projekt VSPOT</li><li>10:00 - 11:30 BarCamp Digital Signage</li></ul>";
         $screen_reception_1 = new Screen();
         $screen_reception_1->name = "Termin Süß";
         $screen_reception_1->description = "Termin mit Herrn Süß";
@@ -218,13 +210,11 @@ class DemoContentSeeder extends Seeder
         $screen_reception_1->channel()->associate($channel_reception);
         $screen_reception_1->save();
         $screen_reception_2_html =
-        "
-        <h3>Heute um 16:45 Uhr</h3>
+        "<h3>Heute um 16:45 Uhr</h3>
         <h1>Live Coding Event</h1>
         <h2>mit Christian Schnagl</h2>
         <p>Kommen Sie uns besuchen: <b style=\"background-color:rgb(74,165,155);\">Halle 4 / Stand 37</span></p>
-        <blockquote><p>Talk is cheap. Show me the code.<br><small>— Linus Torvalds</small></p></blockquote>
-        ";
+        <blockquote><p>Talk is cheap. Show me the code.<br><small>— Linus Torvalds</small></p></blockquote>";
         $screen_reception_2 = new Screen();
         $screen_reception_2->name = "Live Coding Event";
         $screen_reception_2->description = "Heute 12:00 Uhr, Zitat Linus";

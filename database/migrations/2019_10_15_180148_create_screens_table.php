@@ -12,7 +12,7 @@ class CreateScreensTable extends Migration
             $table->unsignedBigInteger('layout_id');
             $table->string('name');
             $table->string('description')->nullable();
-            $table->boolean('active')->default(1); 
+            $table->boolean('active')->default(1);
             $table->string('background_color')->nullable()->default('rgb(0,0,0)');
             $table->string('bg_img_cdn_link')->nullable();
             $table->string('overlay_color')->nullable()->default('rgba(255,255,255,0)');
@@ -23,6 +23,7 @@ class CreateScreensTable extends Migration
             $table->text('text_block')->nullable();
             $table->timestamps();
             $table->foreign('channel_id')->references('id')->on('channels')->onDelete('cascade');
+            $table->unique(['channel_id', 'name']);
         });
     }
     public function down()
