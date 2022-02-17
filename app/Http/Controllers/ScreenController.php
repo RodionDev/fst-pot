@@ -5,6 +5,7 @@ use App\Layout;
 use App\Rules\ValidColor;
 use App\Screen;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 class ScreenController extends Controller
 {
     public function index($channel_id)
@@ -43,7 +44,14 @@ class ScreenController extends Controller
         $this->validate(
             $request,
             [
-                'name' => 'required | string | max:32',
+                'name' => [
+                    'required',
+                    'alpha_dash',
+                    'max:32',
+                    Rule::unique('screens')->where(function ($query) use ($channel_id) {
+                        return $query->where('channel_id', $channel_id);
+                    })
+                ],
                 'description' => 'nullable | string | max:128',
                 'layout_id' => 'required | exists:layouts,id'
             ]
@@ -93,7 +101,14 @@ class ScreenController extends Controller
         $this->validate(
             $request,
             [
-                'name' => 'required | string | max:32',
+                'name' => [
+                    'required',
+                    'alpha_dash',
+                    'max:32',
+                    Rule::unique('screens')->ignore($screen)->where(function ($query) use ($channel_id) {
+                        return $query->where('channel_id', $channel_id);
+                    })
+                ],
                 'description' => 'nullable | string | max:128',
                 'layout_id' => 'required | exists:layouts,id',
                 'background_color' => ['nullable', $colorValidator],

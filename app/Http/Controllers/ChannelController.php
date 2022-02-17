@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use App\Channel;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 class ChannelController extends Controller
 {
     public function index()
@@ -33,13 +34,17 @@ class ChannelController extends Controller
     }
     public function store(Request $request)
     {
-        $this->validate(
-            $request,
-            [
-                'name' => 'required | alpha_dash | max:32 | unique:channels',
-                'description' => 'nullable | string | max:128'
-            ]
-        );
+        $request->validate([
+            'name' => [
+                'required',
+                'alpha_dash',
+                'max:32',
+                Rule::unique('channels')->where(function ($query) {
+                    return $query->where('user_id', auth()->id());
+                })
+            ],
+            'description' => 'nullable | string | max:128'
+        ]);
         try
         {
             $channel = new Channel();
@@ -72,16 +77,20 @@ class ChannelController extends Controller
     }
     public function update(Request $request, Channel $channel)
     {
-        $this->validate(
-            $request,
-            [
-                'name' => 'required | alpha_dash | max:32 | unique:channels,name,'.$channel->id,
-                'description' => 'nullable | string | max:128',
-                'display_time' => 'integer | between:500,30000',
-                'transition_time' => 'integer | between:50,3000',
-                'refresh_time' => 'integer | between:1,300'
-            ]
-        );
+        $request->validate([
+            'name' => [
+                'required',
+                'alpha_dash',
+                'max:32',
+                Rule::unique('channels')->ignore($channel)->where(function ($query) {
+                    return $query->where('user_id', auth()->id());
+                })
+            ],
+            'description' => 'nullable | string | max:128',
+            'display_time' => 'integer | between:500,30000',
+            'transition_time' => 'integer | between:50,3000',
+            'refresh_time' => 'integer | between:1,300'
+        ]);
         try
         {
             $channel->fill($request->all())->save();
