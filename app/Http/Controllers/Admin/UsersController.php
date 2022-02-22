@@ -60,15 +60,12 @@ class UsersController extends Controller
         if($user->is('superadmin')) {
             return back()->with('flash-error', 'Superadministratoren dürfen nicht verändert werden.');
         }
-        $this->validate(
-            $request,
-            [
+        $request->validate([
             'username' => 'required | alpha_dash | max:32 | unique:users,username,'.$user->id,
             'email' => 'required | string | email | max:128 | unique:users,email,'.$user->id,
             'first_name' => 'required | string | max:128',
             'last_name' => 'required | string | max:128'
-            ]
-        );
+        ]);
         try
         {
             $user->roles()->sync($request->roles);
