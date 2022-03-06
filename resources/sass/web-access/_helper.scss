@@ -10,6 +10,9 @@
 .text-right {
     text-align: right;
 }
+.text-center {
+    text-align: right;
+}
 @mixin font-weight($weight) {
     $weights: (
         thin: 100,
