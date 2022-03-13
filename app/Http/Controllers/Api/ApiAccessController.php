@@ -35,6 +35,14 @@ class ApiAccessController extends Controller
             foreach ($screenContentTypes as $type) {
                 if(!in_array($type, $screenConfig)) unset($screen->$type);
             }
+            if($layout == 'test') {
+                $name = $user->name;
+                $deviceName = $device->display_name;
+                $product = $device->product_reference ?? 'ohne Angabe';
+                $location = $device->location ?? 'ohne Angabe';
+                $screen->hml_block =
+                "<p>Benutzer: <strong>$name</strong><br>Gerätename: <strong>$deviceName</strong><br>Gerätekennung: <strong>$product</strong><br>Location: <strong>$location</strong></p>";
+            };
         }
         return response()->json($channel);
     }
