@@ -60,7 +60,7 @@
                 </div>
             </div>
             <div class="panel-footer text-right">
-                <a href="{{ url()->previous() }}" class="btn btn-default pull-left">Zurück</a>
+                {{ Form::vspotBack() }}
                 {{ Form::vspotSubmit() }}
             </div>
         </div> 

@@ -20,13 +20,13 @@ return [
         [
             'text' => 'Frontend',
             'url' => '/',
-            'icon' => 'fas fa-fw fa-arrow-left',
+            'icon' => 'fas fa-fw fa-globe',
         ],
         ['header' => 'Hauptmenü'],
         [
             'text' => 'Dashboard',
             'url' => 'dashboard',
-            'icon' => 'fas fa-fw fa-thumbtack',
+            'icon' => 'fas fa-fw fa-th',
         ],
         [
             'text' => 'Devices',
@@ -36,7 +36,7 @@ return [
                 [
                     'text' => 'Geräteliste',
                     'url' => 'devices',
-                    'icon' => 'fas fa-fw fa-clipboard-list',
+                    'icon' => 'fas fa-fw fa-list-alt',
                     'active' => ['devices', 'devices/?page=*', 'devicesscreens', 'channelsscreens
     'filters' => [
         JeroenNoten\LaravelAdminLte\Menu\Filters\HrefFilter::class,
