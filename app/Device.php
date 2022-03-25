@@ -20,7 +20,7 @@ class Device extends Model
     }
     public function getWebURLUpdateAttribute()
     {
-        $link = $this->makePublicURL(false, true);
+        return $this->makePublicURL(false, true);
     }
     public function getApiURLAttribute()
     {
@@ -28,7 +28,7 @@ class Device extends Model
     }
     public function getApiURLUpdateAttribute()
     {
-        $link = $this->makePublicURL(true, true);
+        return $this->makePublicURL(true, true);
     }
     public function makeQR($api = false, $timestamp = false, $size = 160, $format = 'png')
     {
