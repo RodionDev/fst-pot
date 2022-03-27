@@ -66,8 +66,8 @@
 <script>
 (function initWebAccess() {
     /* show logs */
-    var debug = false;
-    if(!debug){
+    var logging = true;
+    if(!logging){
         if(!window.console) window.console = {};
         var methods = ["log", "debug", "warn", "info"];
         for(var i=0; i < methods.length; i++){
@@ -75,8 +75,13 @@
         }
     }
     var l = console.log;
+    /* get channel config */
+    var displayTime = {{ $channel->display_time ?? 5000 }};
+    var transitionTime = {{ $channel->transition_time ??  1000 }};
+    var refreshTime = {{ $channel->refresh_time ??  5 }} * 1000;
     /* init swiper */
     var swiper = new Swiper('.swiper-container', {
+        init: true,
         direction: 'vertical',
         @if(!$noChannel && $screens->count() > 1)
         loop: true,
@@ -101,9 +106,6 @@
     var visibleClass = 'visible';
     var lastVersion = false;
     var isOffline = false;
-    var displayTime = {{ $channel->display_time ?? 5000 }};
-    var transitionTime = {{ $channel->transition_time ??  1000 }};
-    var refreshTime = {{ $channel->refresh_time ??  5 }} * 1000;
     function isNetworkError(error) {
         return !!error.isAxiosError && !error.response;
     }
@@ -124,7 +126,7 @@
                     if (notification.classList.contains(visibleClass)) {
                         notification.classList.remove(visibleClass);
                     }
-                    // l("Letzte Version: " + lastVersion + " / Neue Version: " + newVersion);
+                    l("Letzte Version: " + lastVersion + " / Neue Version: " + newVersion);
                 })
                 .catch(function (error) {
                     if (isNetworkError(error)) {
