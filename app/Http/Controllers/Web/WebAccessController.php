@@ -12,9 +12,12 @@ class WebAccessController extends Controller
         if($user->api_token != $request->api_token) abort(403, 'Unberechtigter Zugriff');
         $device = $user->devices->find($device_id);
         if($request->exists('timestamp')) {
-            $lastUpdate = $device->updated_at->timestamp;
-            if($device->channel && $device->channel->updated_at->timestamp > $lastUpdate)
-                $lastUpdate = $device->channel->updated_at->timestamp;
+            $lastUpdateDevice = $device->updated_at->timestamp;
+            $lastUpdate = $lastUpdateDevice;
+            if($device->channel) {
+                $lastUpdateChannel = $device->channel->updated_at->timestamp;
+                if($lastUpdateChannel > $lastUpdateDevice) $lastUpdate = $lastUpdateChannel;
+            }
             return response()->json([
                 'lastUpdate' => $lastUpdate
             ]);
