@@ -1,17 +1,17 @@
 <?php
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Access;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
 use stdClass;
-class ApiAccessController extends Controller
+class DeviceApiAccessController extends Controller
 {
     public function respond_v1(Request $request, $user_id, $device_id)
     {
         \Debugbar::disable();
         $user = User::find($user_id);
-        if($user->api_token != $request->api_token) abort(403, 'Unberechtigter Zugriff');
         $device = $user->devices->find($device_id);
+        if(!$request->api_token || $device->api_token != $request->api_token) abort(403, 'Unberechtigter Zugriff auf dieses Gerät');
         if($request->exists('timestamp')) {
             $lastUpdate = $device->updated_at->timestamp;
             if($device->channel && $device->channel->updated_at->timestamp > $lastUpdate)
@@ -40,7 +40,7 @@ class ApiAccessController extends Controller
                 $deviceName = $device->display_name;
                 $product = $device->product_reference ?? 'ohne Angabe';
                 $location = $device->location ?? 'ohne Angabe';
-                $screen->hml_block =
+                $screen->html_block =
                 "<p>Benutzer: <strong>$name</strong><br>Gerätename: <strong>$deviceName</strong><br>Gerätekennung: <strong>$product</strong><br>Location: <strong>$location</strong></p>";
             };
         }

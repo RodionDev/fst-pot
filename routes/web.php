@@ -7,10 +7,9 @@ Route::view('produkt', 'frontend.pages.primary.produkt')->name('produkt');
 Route::view('impressum', 'frontend.pages.secondary.impressum')->name('impressum');
 Route::view('datenschutz', 'frontend.pages.secondary.datenschutz')->name('datenschutz');
 Route::get('api/demo', 'Test\JsonDemoController@index')->name('demo.api.json');
-Route::middleware('auth:api')->group(function() {
-    Route::namespace('Web')->name('web.')->prefix('web/v1')->group(function () {
-        Route::get('{user}/{device}', 'WebAccessController@respond_v1')->name('access_v1');
-    });
+Route::namespace('Access')->name('access.') ->group(function () {
+    Route::prefix('web/v1')->get('{user}/{device}', 'DeviceWebAccessController@respond_v1')->name('web');
+    Route::prefix('api/v1')->get('{user}/{device}', 'DeviceApiAccessController@respond_v1')->name('api');
 });
 Auth::routes(['verify' => true]);
 Route::group(['middleware' => ['verified']], function () {

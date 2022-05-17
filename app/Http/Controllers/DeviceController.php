@@ -2,7 +2,10 @@
 namespace App\Http\Controllers;
 use App\Device;
 use Carbon\Carbon;
+use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use PDF;
@@ -136,7 +139,7 @@ class DeviceController extends Controller
         $user = auth()->user();
         $device = $user->devices()->whereId($deviceId)->first();
         $dt = Carbon::now();
-        $qrCodeSize = 180;
+        $qrCodeSize = 200;
         $data['date'] = $dt->isoFormat('D. MMMM GGGG');
         $data['time'] = $dt->isoFormat('HH:mm');
         $data['year'] = $dt->isoFormat('GGGG');
@@ -144,11 +147,9 @@ class DeviceController extends Controller
         $data['device'] = $device;
         $data['qrCodeSize'] = $qrCodeSize;
         $data['weburl'] = $device->weburl;
-        $data['webqr_b64'] = base64_encode($device->makeQR(false));
-        $data['webqr_b64_ts'] = base64_encode($device->makeQR(false, true));
+        $data['webqr_b64'] = base64_encode($device->makeQR(false, false, $qrCodeSize));
         $data['apiurl'] = $device->apiurl;
-        $data['apiqr_b64'] = base64_encode($device->makeQR(true));
-        $data['apiqr_b64_ts'] = base64_encode($device->makeQR(true, true));
+        $data['apiqr_b64'] = base64_encode($device->makeQR(true, false, $qrCodeSize));
         $pdf = PDF::loadView('pdf.device-access-links', $data);
         return $pdf->stream();
     }

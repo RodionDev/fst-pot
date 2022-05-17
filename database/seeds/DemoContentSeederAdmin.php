@@ -18,6 +18,7 @@ class DemoContentSeederAdmin extends Seeder
         $deviceDemo->description = 'Kein physikalisches Gerät, flexible Verwendung für Demos und Tests';
         $deviceDemo->user()->associate($admin);
         $deviceDemo->save();
+        $deviceDemo->update(['api_token' => 'kQy24i57RTEvlOIHLVXCr0h19i503VPY6849O1pJwBSKv']);
         $channel_testing = new Channel();
         $channel_testing->name = "Testing";
         $channel_testing->description = "Channel mit einigen einfachen Screens";
