@@ -2,7 +2,8 @@ const mix = require('laravel-mix');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 require('laravel-mix-purgecss');
 $purgeOptions = {
-    folders: ['views'],
+    folders: ['views','app','resources'],
+    whitelistPatterns: [/^view-/],
 };
 mix.js('resources/js/app-frontend.js', 'public/js')
    .sass('resources/sass/frontend/app-frontend.scss', 'public/css')
