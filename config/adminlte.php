@@ -2,7 +2,7 @@
 return [
     'title' => env('APP_NAME'),
     'title_prefix' => '',
-    'title_postfix' => ' — ' . env('APP_NAME'),
+    'title_postfix' => ' – ' . env('APP_NAME'),
     'logo' => '<b>'.env('APP_NAME').'</b>',
     'logo_mini' => '<small>'.env('APP_NAME').'</small>',
     'skin' => 'black',
