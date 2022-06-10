@@ -56,7 +56,7 @@
             @endforelse
         @endif
     </section>
-    @if(!$noChannel && $screens->count() > 2)
+    @if(!$noChannel && $screens->count() > 2 && $screens->count() < 13)
     <div class="swiper-pagination"></div>
     @endif
 </main>
