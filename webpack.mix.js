@@ -4,6 +4,7 @@ require('laravel-mix-purgecss');
 $purgeOptions = {
     folders: ['views','app','resources'],
     whitelistPatterns: [/^view-/],
+    whitelist: ['vspot', 'skin-black'],
 };
 mix.js('resources/js/app-frontend.js', 'public/js')
    .sass('resources/sass/frontend/app-frontend.scss', 'public/css')
