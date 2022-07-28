@@ -28,8 +28,7 @@ Route::group(['middleware' => ['verified']], function () {
         Route::resource('devices', 'DeviceController', ['except' => ['show']]);
         Route::resource('channels', 'ChannelController', ['except' => ['show']]);
         Route::resource('channels.screens', 'ScreenController', ['except' => ['show']]);
-        Route::get('channels/{channel}/screens/{screen}/content/edit', 'ScreenController@editContent')->name('channels.screens.content.edit');
-        Route::get('channels/{channel}/screens/{screen}/content/update', 'ScreenController@updateContent')->name('channels.screens.content.update');
+        Route::get('channels/{channel}/screens/{screen}/duplicate', 'ScreenController@duplicate')->name('channels.screens.duplicate');
     });
     Route::middleware('can:run-tests')->group(function () {
         Route::namespace('Test')->name('test.')->prefix('test')->group(function () {

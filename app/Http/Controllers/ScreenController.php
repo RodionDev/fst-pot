@@ -49,8 +49,8 @@ class ScreenController extends Controller
             [
                 'name' => [
                     'required',
-                    'alpha_dash',
-                    'max:32',
+                    'string',
+                    'between:3,32',
                     Rule::unique('screens')->where(function ($query) use ($channel_id) {
                         return $query->where('channel_id', $channel_id);
                     })
@@ -98,6 +98,23 @@ class ScreenController extends Controller
             return back()->with('flash-error', "Der Screen $screen->name kann wegen eines Fehlers nicht editiert werden.");
         }
     }
+    public function duplicate($channel_id, Screen $screen)
+    {
+        try {
+            $screen->load('channel', 'layout');
+            $newScreen = $screen->replicate();
+            $newScreen->save();
+            return redirect()
+                ->route('channels.screens.index', $channel_id)
+                ->with('flash-success', "Der Screen wurde dupliziert.");
+        }
+        catch(Exception $e)
+        {
+            Log::error('^ Fehler in "ScreenController@duplicate"!');
+            Log::error($e);
+            return back()->with('flash-error', "Der Screen $screen->name kann wegen eines Fehlers nicht dupliziert werden.");
+        }
+    }
     public function update(Request $request, $channel_id, Screen $screen)
     {
         $colorValidator = new ValidColor();
@@ -106,8 +123,8 @@ class ScreenController extends Controller
             [
                 'name' => [
                     'required',
-                    'alpha_dash',
-                    'max:32',
+                    'string',
+                    'between:3,32',
                     Rule::unique('screens')->ignore($screen)->where(function ($query) use ($channel_id) {
                         return $query->where('channel_id', $channel_id);
                     })
