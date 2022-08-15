@@ -84,8 +84,10 @@
         init: true,
         direction: 'vertical',
         @if(!$noChannel && $screens->count() > 1)
+            @if($channel->uses_parallax)
+            parallax: true,
+            @endunless
         loop: true,
-        parallax:true,
         autoplay: {
             delay: displayTime,
         },

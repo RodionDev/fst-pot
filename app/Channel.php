@@ -4,10 +4,13 @@ use Illuminate\Database\Eloquent\Model;
 class Channel extends Model
 {
     protected $fillable = [
-        'name', 'description', 'display_time', 'transition_time', 'refresh_time'
+        'name', 'description', 'display_time', 'transition_time', 'refresh_time', 'uses_parallax'
     ];
     protected $hidden = [
         'id', 'user_id', 'created_at', 'updated_at'
+    ];
+    protected $casts = [
+        'uses_parallax' => 'boolean'
     ];
     public function user ()
     {
