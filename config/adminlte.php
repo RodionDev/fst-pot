@@ -92,9 +92,14 @@ return [
             ],
         ],
         [
-            'name' => 'Sweetalert2',
+            'name' => 'Izitoast',
             'active' => true,
             'files' => [
+                [
+                    'type' => 'css',
+                    'asset' => false,
+                    'location' => '
+                ],
                 [
                     'type' => 'js',
                     'asset' => false,
