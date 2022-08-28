@@ -1,10 +1,9 @@
 @extends('adminlte::page')
 @section('title', 'Benutzer bearbeiten')
 @section('content_header')
-    <h1>Benutzer&shy;verwaltung</h1>
+    <h1>Benutzer bearbeiten</h1>
 @stop
 @section('content')
-<h2>Benutzer <b>{{ $user->name }}</b> bearbeiten</h2>
 <div class="row">
     <div class="col-xs-12">
         {!! Form::model($user, [
