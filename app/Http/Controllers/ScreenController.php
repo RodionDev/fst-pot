@@ -16,7 +16,7 @@ class ScreenController extends Controller
         try
         {
             $channel = auth()->user()->channels()->find($channel_id);
-            $screens = $channel->screens()->paginate(6);
+            $screens = $channel->screens()->orderBy('order', 'asc')->paginate(8);
             return view('backend.signage.screens.index')
                 ->with('screens', $screens)
                 ->with('channel', $channel);
@@ -106,7 +106,7 @@ class ScreenController extends Controller
             $newScreen->save();
             return redirect()
                 ->route('channels.screens.index', $channel_id)
-                ->with('flash-success', "Der Screen wurde dupliziert.");
+                ->with('flash-success', "Der Screen $screen->name wurde dupliziert.");
         }
         catch(Exception $e)
         {
@@ -161,6 +161,37 @@ class ScreenController extends Controller
         {
             Log::error('Fehler in "ScreenController@destroy"!');
             return back()->with('flash-error', "Der Screen $screen->name konnte wegen eines Fehlers nicht gelöscht werden.");
+        }
+    }
+    public function move($channel_id, Screen $screen, $action)
+    {
+        try {
+            switch ($action) :
+                case 'start' :
+                    $screen->moveToStart();
+                    $message = 'an den Anfang';
+                    break;
+                case 'up' :
+                    $screen->moveOrderUp();
+                    $message = 'eine Position nach vorne';
+                    break;
+                case 'down' :
+                    $screen->moveOrderDown();
+                    $message = 'eine Position nach hinten';
+                    break;
+                case 'end' :
+                    $screen->moveToEnd();
+                    $message = 'an das Ende';
+                    break;
+            endswitch;
+            return redirect()
+                ->route('channels.screens.index', $channel_id)
+                ->with('flash-success', "Der Screen „{$screen->name}“ wurde $message verschoben.");
+        }
+        catch(Exception $e)
+        {
+            Log::error('Fehler in "ScreenController@move"!');
+            return back()->with('flash-error', "Der Screen $screen->name kann wegen eines Fehlers nicht verschoben werden.");
         }
     }
 }

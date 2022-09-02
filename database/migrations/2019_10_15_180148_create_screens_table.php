@@ -10,6 +10,7 @@ class CreateScreensTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('channel_id');
             $table->unsignedBigInteger('layout_id');
+            $table->unsignedBigInteger('order');
             $table->string('name');
             $table->string('description')->nullable();
             $table->boolean('active')->default(1);
