@@ -6,7 +6,6 @@ Route::view('/', 'frontend.pages.primary.front')->name('front');
 Route::view('produkt', 'frontend.pages.primary.produkt')->name('produkt');
 Route::view('impressum', 'frontend.pages.secondary.impressum')->name('impressum');
 Route::view('datenschutz', 'frontend.pages.secondary.datenschutz')->name('datenschutz');
-Route::get('api/demo', 'Test\JsonDemoController@index')->name('demo.api.json');
 Route::namespace('Access')->name('access.') ->group(function () {
     Route::prefix('web/v1')->get('{user}/{device}', 'DeviceWebAccessController@respond_v1')->name('web');
     Route::prefix('api/v1')->get('{user}/{device}', 'DeviceApiAccessController@respond_v1')->name('api');
