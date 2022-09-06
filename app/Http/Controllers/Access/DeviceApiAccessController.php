@@ -11,7 +11,10 @@ class DeviceApiAccessController extends Controller
         \Debugbar::disable();
         $user = User::find($user_id);
         $device = $user->devices->find($device_id);
-        if(!$request->api_token || $device->api_token != $request->api_token) abort(403, 'Unberechtigter Zugriff auf dieses Gerät');
+        $device_views_public_channel = $device->channel->api_is_public;
+        if(!$device_views_public_channel) {
+            if (!$request->api_token || $device->api_token != $request->api_token) abort(403, 'Unberechtigter Zugriff');
+        }
         if($request->exists('timestamp')) {
             $lastUpdate = $device->updated_at->timestamp;
             if($device->channel && $device->channel->updated_at->timestamp > $lastUpdate)
