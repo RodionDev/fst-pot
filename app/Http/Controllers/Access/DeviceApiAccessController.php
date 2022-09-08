@@ -11,7 +11,7 @@ class DeviceApiAccessController extends Controller
         \Debugbar::disable();
         $user = User::find($user_id);
         $device = $user->devices->find($device_id);
-        $device_views_public_channel = $device->channel->api_is_public;
+        $device_views_public_channel = $device->channel->api_is_public ?? false;
         if(!$device_views_public_channel) {
             if (!$request->api_token || $device->api_token != $request->api_token) abort(403, 'Unberechtigter Zugriff');
         }
