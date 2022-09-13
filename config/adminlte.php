@@ -49,6 +49,22 @@ return [
     ],
     'plugins' => [
         [
+            'name' => 'BS-Toggle',
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => '
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => false,
+                    'location' => '
+                ],
+            ],
+        ],
+        [
             'name' => 'Datatables',
             'active' => true,
             'files' => [
