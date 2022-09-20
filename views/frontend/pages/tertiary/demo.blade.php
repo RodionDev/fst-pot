@@ -7,4 +7,5 @@
     <section class="front-logo-wrapper">@include('svg.logo_text')</section>
 </div>
 @endsection
+@section('cookie-consent')@show
 @section('footer')@show
