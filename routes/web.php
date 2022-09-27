@@ -4,6 +4,7 @@ View::composer('*', function($view){
 });
 Route::view('/', 'frontend.pages.primary.front')->name('front');
 Route::view('produkt', 'frontend.pages.primary.produkt')->name('produkt');
+Route::view('downloads', 'frontend.pages.primary.downloads')->name('downloads');
 Route::view('impressum', 'frontend.pages.secondary.impressum')->name('impressum');
 Route::view('datenschutz', 'frontend.pages.secondary.datenschutz')->name('datenschutz');
 Route::view('demo', 'frontend.pages.tertiary.demo')->name('demo');
