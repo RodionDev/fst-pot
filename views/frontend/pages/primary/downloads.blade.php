@@ -1,5 +1,5 @@
 @extends('frontend.layouts.app')
-@section('pageTitle', 'Produkt')
+@section('pageTitle', 'Downloads')
 @section('content')
 <div class="container">
     <h1 class="page-heading page-heading">Downloads</h1>
