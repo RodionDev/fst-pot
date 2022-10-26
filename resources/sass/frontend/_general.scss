@@ -22,6 +22,9 @@ hr {
         background: -webkit-gradient(linear, 0 0, 100% 0, from(#fff), to(#fff), color-stop(0%, $unobtrusive));
     }
 }
+figcaption {
+    font-size: 85%;
+}
 .hidden-form {
     display: none;
 }
